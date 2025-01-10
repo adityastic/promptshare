@@ -9,15 +9,17 @@ import {signIn, signOut, useSession, getProviders} from 'next-auth/react'
 const Nav = () => {
     const [providers, setProviders] = useState(null)
     const [toggleDropdown, setToggleDropdown] = useState(false);
+    const {data: session} = useSession()
+
 
     useEffect(() => {
-        (async () => {
+        const setupProviders = async () => {
           const res = await getProviders();
           setProviders(res);
-        })();
+        }
+        setupProviders();
       }, []);
 
-    const isUserLoggedIn = true
   return (
     <nav className='flex-between w-full mb-16 pt-3'>
         
@@ -27,12 +29,12 @@ const Nav = () => {
         </Link>
         {/* desktop navigation */}
         <div className='hidden sm:flex'>
-        {isUserLoggedIn ? (
+        {session?.user ? (
             <div className='flex gap-3'>
                 <Link href='/create-prompt' className='black_btn'>Create Prompt</Link>
                 <button className='outline_btn' onClick={signOut}>Sign Out</button>
                 <Link href='/profile'>
-                    <Image src='/assets/images/logo.svg' width={30} height={30} className='rounded-full' alt='profile'/>
+                    <Image src={session?.user.image} width={30} height={30} className='rounded-full' alt='profile'/>
                 </Link>
             </div>
         ) :
@@ -48,9 +50,9 @@ const Nav = () => {
         </div>
         {/* mobile navigation */}
         <div className='sm:hidden flex relative'>
-            {isUserLoggedIn ? (
+            {session?.user ? (
                 <div className='flex'>
-                    <Image src='/assets/images/logo.svg' width={30} height={30} className='rounded-full' alt='profile' onClick={()=> setToggleDropdown((prev)=>!prev)}/>
+                    <Image src={session?.user.image} width={30} height={30} className='rounded-full' alt='profile' onClick={()=> setToggleDropdown((prev)=>!prev)}/>
                     {toggleDropdown && (
                         <div className='dropdown'>
                             <Link href='/profile' className='dropdown_link' onClick={()=> setToggleDropdown(false)}>
