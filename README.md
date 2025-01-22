@@ -26,6 +26,39 @@ PromptShare is a modern web application that enables users to discover, create, 
 
 ## 🚀 Getting Started
 
+### Quick Setup with Dev Containers (Recommended)
+
+If you’re using VS Code, you can quickly get started using [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers):
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/promptshare.git
+```
+
+2. Open the folder in VS Code with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) installed.
+
+3. When prompted, reopen the project in the dev container. The setup will automatically:
+- Setup a node.js development container
+- Setup a MongoDB development container
+- Install dependencies
+- Set MONGODB_URI environment variable
+
+4. Add the remaining environment variables to .env.local:
+```env
+GOOGLE_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_URL_INTERNAL=http://localhost:3000
+NEXTAUTH_SECRET=your_nextauth_secret
+```
+
+4. Run the development server:
+```bash
+npm run dev
+```
+
+### Manual Setup
+
 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/promptshare.git

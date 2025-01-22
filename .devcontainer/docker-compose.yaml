@@ -1,0 +1,22 @@
+services:
+  promtshare:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity
+    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
+    # (Adding the "ports" property to this file will not forward from a Codespace.)
+    network_mode: service:atlas
+    volumes:
+      - ..:/workspace:cached
+    
+  atlas:
+    image: mongodb/mongodb-atlas-local:8
+    hostname: atlas
+    container_name: atlas
+    restart: unless-stopped
+    volumes:
+      - atlas-data:/data/db
+
+volumes:
+  atlas-data:

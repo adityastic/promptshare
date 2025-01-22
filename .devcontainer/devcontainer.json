@@ -1,0 +1,12 @@
+// https://aka.ms/devcontainer.json
+{
+	"name": "PromptShare Dev Container",
+	"dockerComposeFile": "docker-compose.yaml",
+	"service": "promtshare",
+	"workspaceFolder": "/workspace",
+	"forwardPorts": [
+		3000,
+		27017
+	],
+	"postCreateCommand": ".devcontainer/setup-environment.sh"
+}
